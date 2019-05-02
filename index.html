@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Simple Client Manager</title>
+    <base href="./" />
+
+    <!--Import Google Icon Font-->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!--Import materialize.css-->
+    <link type="text/css" rel="stylesheet" href="./asset/css/materialize.css" media="screen,projection" />
+
+    <!--Let browser know website is optimized for mobile-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <script type="text/javascript" src="./asset/js/jquery.js"></script>
+    <style>
+        .sort-cli {
+            cursor: pointer;
+        }
+
+        .active-sort {
+            color: blue;
+        }
+        .delete{
+            cursor: pointer;
+        }
+    </style>
+
+</head>
+
+<body>
+    <header>
+        <nav class="black">
+            <div class="nav-wrapper">
+                <a href="" class="brand-logo"> Simple Client Manager
+                    <i class="large material-icons">assignment_ind</i>
+                </a>
+            </div>
+        </nav>
+    </header>
+    <div class="container">
+        <br />
+        <div class="row">
+            <div class="col s12">
+                <ul class="tabs">
+                    <li class="tab col s3"><a href="#Client">Client</a></li>
+                    <li class="tab col s3"><a href="#Product">Product</a></li>
+                    <li class="tab col s3"><a href="#Data">Data</a></li>
+                </ul>
+            </div>
+
+            <!-- for clients -->
+            <div id="Client" class="col s12 ">
+                <br />
+                <h2>Add a Client</h2>
+                <div class="row" id="addclientForm">
+                    <div class="input-field col s6">
+                        <i class="material-icons prefix">account_circle</i>
+                        <input id="icon_prefix" type="text" name="Form[name]">
+                        <label for="icon_prefix">Client Name</label>
+                    </div>
+                    <div class="input-field col s6">
+                        <i class="material-icons prefix">phone</i>
+                        <input id="icon_telephone" type="tel" name="Form[phone]">
+                        <label for="icon_telephone">Telephone</label>
+                    </div>
+                    <div class="input-field col s12">
+                        <i class="material-icons prefix">email</i>
+                        <input id="email" type="email" name="Form[email]">
+                        <label for="email">Email</label>
+                    </div>
+                    <div class="input-field col s12">
+                        <select name="Form[type]">
+                            <option value="0" disabled selected>Choose your option</option>
+                            <option value="1">paid all in advance</option>
+                            <option value="2">paid only 15%</option>
+                            <option value="3">not paid</option>
+                        </select>
+                        <label>Chose a client type</label>
+                    </div>
+                    <div class="input-field col s12" id="choce-a-prod">
+                        <!----select name="Form[product_id]" id="choce-a-prod">
+                            <option value="0" disabled selected>Choose your option</option>
+                        </select>
+                        <label>Chose a product</label -->
+                    </div>
+                    <br />
+                    <a class="waves-effect waves-light btn-large addClient"><i
+                            class="material-icons left ">group_add</i>Add</a>
+                </div>
+
+                <br />
+                <h2>Update a Client</h2>
+                <div class="row" id="updateClientForm">
+                    <div id="loadClients"></div>
+                    <br />
+                    <input type="hidden" name="Form[id]" id="updateClientID" value="" />
+                    <div class="input-field col s6">
+                        <i class="material-icons prefix">account_circle</i>
+                        <input id="updateClientName" type="text" name="Form[name]" value="">
+                        <label for="updateClientName">Client Name</label>
+                    </div>
+                    <div class="input-field col s6">
+                        <i class="material-icons prefix">phone</i>
+                        <input id="updateClientPhone" type="tel" name="Form[phone]" value="">
+                        <label for="updateClientPhone">Telephone</label>
+                    </div>
+                    <div class="input-field col s12">
+                        <i class="material-icons prefix">email</i>
+                        <input id="updateClientEmail" type="email" name="Form[email]" value="">
+                        <label for="updateClientEmail">Email</label>
+                    </div>
+                    <div class="input-field col s12">
+                        <select name="Form[type]" id="updateClientType">
+                            <option value="0" disabled selected>Choose your option</option>
+                            <option value="1">paid all in advance</option>
+                            <option value="2">paid only 15%</option>
+                            <option value="3">not paid</option>
+                        </select>
+                        <label>Chose a client type</label>
+                    </div>
+                    <div class="input-field col s12" id="updateClientProd"></div>
+                    <br />
+                    <a class="waves-effect waves-light btn-large updateClient"><i
+                            class="material-icons left ">update</i>update</a>
+                </div>
+            </div>
+
+            <!-- for products -->
+            <div id="Product" class="col s12">
+                <br />
+                <h2>Add a Product</h2>
+                <div class="row" id="addProductForm" class="js-addProduct">
+
+                    <!--input type="hidden" name="action" value="addProuct"-->
+
+                    <div class="input-field col s12">
+                        <input id="nameProd" type="text" name="addProduct[name]">
+                        <label for="nameProd">Name</label>
+                    </div>
+                    <div class="input-field col s6">
+                        <i class="material-icons prefix">attach_money</i>
+                        <input id="price" type="number" name="addProduct[price]">
+                        <label for="price">Price</label>
+                    </div>
+                    <div class="input-field col s6">
+                        <input id="quantity" type="number" name="addProduct[quantity]">
+                        <label for="quantity">Quantity</label>
+                    </div>
+                    <br />
+                    <a class="waves-effect waves-light btn-large addProd"><i
+                            class="material-icons left">add_box</i>Add</a>
+                </div>
+                <br />
+                <hr />
+                <h2>Update Product</h2>
+                <div class="row" id="updateProductForm">
+                    <div id="loadProducts"></div>
+                    <br />
+                    <input type="hidden" name="Form[id]" id="updateProdID" value="" />
+                    <div class="input-field col s12">
+                        <input id="updateProdName" type="text" name="Form[name]">
+                        <label for="updateProdName">Name</label>
+                    </div>
+                    <div class="input-field col s6">
+                        <i class="material-icons prefix">attach_money</i>
+                        <input id="updateProdPprice" type="number" name="Form[price]">
+                        <label for="updateProdPprice">Price</label>
+                    </div>
+                    <div class="input-field col s6">
+                        <input id="updateProdQuantity" type="number" name="Form[quantity]">
+                        <label for="updateProdQuantity">Quantity</label>
+                    </div>
+                    <br />
+                    <a class="waves-effect waves-light btn-large updateProd "><i
+                            class="material-icons left">update</i>Update</a>
+                </div>
+            </div>
+
+            <div id="Data" class="col s12">
+
+                <div id="ClientsTable"></div>
+                <hr />
+                <div id="ProductsTable"></div>
+                <hr />
+                <br />
+                <h2>Search by Price</h2>
+                <div class="input-field col s12">
+                    <input id="priceSearcher" type="number" value="" placeholder="Enter only numbers">
+                    <div class="search-table">
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <!--JavaScript at end of body for optimized loading-->
+    <script type="text/javascript" src="./asset/js/materialize.min.js"></script>
+    <script type="text/javascript" src="./asset/js/main.js"></script>
+</body>
+
+</html>
